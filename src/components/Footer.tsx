@@ -170,7 +170,7 @@ function Footer() {
           gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
           gap: '3rem',
           marginBottom: '3rem'
-        }}>
+        }} className="footer-grid">
           {/* Logo and Description */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}

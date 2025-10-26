@@ -4,8 +4,17 @@ import { ChevronDown, MessageCircle } from 'lucide-react'
 
 function Hero3D() {
   const [scrollProgress, setScrollProgress] = useState(0)
+  const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
+    // Check if mobile
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 480)
+    }
+    
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+
     const handleScroll = () => {
       const scrollTop = window.scrollY
       const docHeight = document.documentElement.scrollHeight - window.innerHeight
@@ -14,7 +23,10 @@ function Hero3D() {
     }
 
     window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('resize', checkMobile)
+    }
   }, [])
 
   const scrollToProducts = () => {
@@ -57,11 +69,12 @@ function Hero3D() {
             >
               Solutions Premium
             </motion.span>
-            <br />
+            <br style={{ display: isMobile ? 'none' : 'block' }} />
             <motion.span
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 1.4 }}
+              style={{ display: isMobile ? 'block' : 'inline', marginTop: isMobile ? '0.5rem' : 0 }}
             >
               pour Espaces Sportifs
             </motion.span>
@@ -99,7 +112,7 @@ function Hero3D() {
             </motion.span>
           </motion.div>
 
-          <motion.p className="subtitle">
+          <motion.p className="subtitle" style={{ wordWrap: 'break-word', overflowWrap: 'break-word' }}>
             Performance. Durabilité. Excellence Made in Tunisia.
           </motion.p>
 
