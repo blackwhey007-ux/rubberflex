@@ -18,6 +18,9 @@ export const useAnalytics = () => {
 };
 
 const sendBeacon = (page: string, referrer: string, duration: number) => {
+  // Use API_URL from config or localhost
+  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+  
   // Utiliser sendBeacon pour les données critiques ou fetch pour le reste
   const data = JSON.stringify({
     page,
@@ -27,14 +30,20 @@ const sendBeacon = (page: string, referrer: string, duration: number) => {
     timestamp: new Date().toISOString()
   });
   
+  // Only track if backend is available (not on localhost in production)
+  if (window.location.hostname !== 'localhost') {
+    // In production, skip analytics if backend not deployed yet
+    return;
+  }
+  
   // Utiliser sendBeacon si disponible pour garantir l'envoi
   if ('sendBeacon' in navigator) {
-    navigator.sendBeacon('http://localhost:3000/api/analytics/track', 
+    navigator.sendBeacon(`${API_URL}/api/analytics/track`, 
       new Blob([data], { type: 'application/json' })
     );
   } else {
     // Fallback pour navigateurs anciens
-    fetch('http://localhost:3000/api/analytics/track', {
+    fetch(`${API_URL}/api/analytics/track`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: data,
