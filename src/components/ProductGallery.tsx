@@ -51,8 +51,17 @@ export default function ProductGallery() {
       alignItems: 'center',
       justifyContent: 'center'
     }}>
-      <div style={{ maxWidth: '1200px', width: '100%' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '60px', alignItems: 'center' }}>
+      <div style={{ maxWidth: '1200px', width: '100%', padding: '0 20px' }}>
+        <div style={{ 
+          display: 'grid', 
+          gridTemplateColumns: '1fr 1fr', 
+          gap: '60px', 
+          alignItems: 'center',
+          '@media (max-width: 768px)': {
+            gridTemplateColumns: '1fr',
+            gap: '30px'
+          }
+        }}>
           
           {/* Image/Preview Section */}
           <motion.div
@@ -71,7 +80,11 @@ export default function ProductGallery() {
               minHeight: '500px',
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'center'
+              justifyContent: 'center',
+              '@media (max-width: 768px)': {
+                padding: '30px',
+                minHeight: '300px'
+              }
             }}
           >
             <div style={{
