@@ -608,6 +608,15 @@ body {
     padding: 0 15px; /* Réduire le padding horizontal */
   }
   
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+  
+  .footer-grid h3 {
+    font-size: 2rem !important;
+  }
+  
   /* Grille 2 colonnes sur mobile pour WhyRubberflex */
   .grid-3 {
     grid-template-columns: 1fr 1fr !important; /* 2 colonnes au lieu de 1 */
