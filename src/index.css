@@ -422,6 +422,17 @@ body {
   .card {
     padding: 1.5rem !important; /* Réduire le padding interne des cartes */
   }
+  
+  /* Product Gallery Mobile */
+  .product-gallery-grid {
+    grid-template-columns: 1fr !important;
+    gap: 30px !important;
+  }
+  
+  .product-gallery-preview {
+    padding: 30px !important;
+    min-height: 300px !important;
+  }
 }
 
 /* Media queries globales pour optimisation mobile */

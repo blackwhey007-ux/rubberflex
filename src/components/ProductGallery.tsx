@@ -52,19 +52,16 @@ export default function ProductGallery() {
       justifyContent: 'center'
     }}>
       <div style={{ maxWidth: '1200px', width: '100%', padding: '0 20px' }}>
-        <div style={{ 
+        <div className="product-gallery-grid" style={{ 
           display: 'grid', 
           gridTemplateColumns: '1fr 1fr', 
           gap: '60px', 
-          alignItems: 'center',
-          '@media (max-width: 768px)': {
-            gridTemplateColumns: '1fr',
-            gap: '30px'
-          }
+          alignItems: 'center'
         }}>
           
           {/* Image/Preview Section */}
           <motion.div
+            className="product-gallery-preview"
             initial={{ opacity: 0, x: -50 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8 }}
@@ -80,11 +77,7 @@ export default function ProductGallery() {
               minHeight: '500px',
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'center',
-              '@media (max-width: 768px)': {
-                padding: '30px',
-                minHeight: '300px'
-              }
+              justifyContent: 'center'
             }}
           >
             <div style={{
