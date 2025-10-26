@@ -1,0 +1,66 @@
+============================================
+VERCEL DEPLOYMENT - SIMPLE STEPS
+============================================
+
+STEP 1: Push to GitHub
+------------------------
+1. Create new repository at https://github.com/new
+   Name it: rubberflex
+   Keep it public (free)
+
+2. Run these commands:
+   
+   git remote add origin https://github.com/YOUR_USERNAME/rubberflex.git
+   git branch -M main
+   git push -u origin main
+
+STEP 2: Deploy to Vercel
+-------------------------
+1. Go to https://vercel.com
+2. Sign up with GitHub
+3. Click "Add New Project"
+4. Select your "rubberflex" repository
+5. Vercel auto-detects Vite
+6. Click "Deploy" button
+7. Wait 2-3 minutes
+8. Your site is LIVE! 🎉
+
+STEP 3: Get Your URL
+---------------------
+Vercel gives you a URL like:
+https://rubberflex.vercel.app
+
+Visit it to see your landing page!
+
+============================================
+WHAT YOU GET
+============================================
+
+✅ Landing page live on internet
+✅ Contact form (connects to local backend)
+✅ Admin interface (needs local backend)
+✅ SSL/HTTPS automatically
+✅ CDN for fast loading
+✅ Free hosting forever (100GB/month)
+
+============================================
+ADMIN ACCESS
+============================================
+
+Email: admin@rubberflex.tn
+Password: admin123
+
+Note: Admin only works if backend is running locally
+      or deployed to Railway.
+
+============================================
+NEXT STEPS
+============================================
+
+After this deployment:
+1. Deploy backend to Railway (see DEPLOYMENT.md)
+2. Update VITE_API_URL in Vercel
+3. Add custom domain (optional)
+
+============================================
+
