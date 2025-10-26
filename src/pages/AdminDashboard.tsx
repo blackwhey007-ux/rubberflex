@@ -8,7 +8,7 @@ import DevisPage from './admin/DevisPage';
 import FacturesPage from './admin/FacturesPage';
 
 interface AdminDashboardProps {
-  onNavigate: (page: string) => void;
+  onNavigate?: (page: string) => void;
   onLogout: () => void;
 }
 

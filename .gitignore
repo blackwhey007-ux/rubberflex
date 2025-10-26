@@ -30,3 +30,5 @@ backend/.env.production
 *.njsproj
 *.sln
 *.sw?
+
+.vercel

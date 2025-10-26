@@ -62,13 +62,19 @@ export default function App() {
     }
   }
 
+  // Gérer la déconnexion
+  const handleLogout = () => {
+    localStorage.removeItem('token')
+    navigate('/admin')
+  }
+
   // Afficher la bonne page
   if (page === 'admin-login') {
     return <AdminLogin onNavigate={handleNavigation} />
   }
 
   if (page === 'admin-dashboard') {
-    return <AdminDashboard onNavigate={handleNavigation} />
+    return <AdminDashboard onNavigate={handleNavigation} onLogout={handleLogout} />
   }
 
   return <LandingPage />
