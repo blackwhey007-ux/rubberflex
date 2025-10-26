@@ -89,13 +89,13 @@ export default function Layout({ children }: LayoutProps) {
                   transition: 'all 0.3s',
                   fontWeight: isActive ? 'bold' : 'normal'
                 }}
-                onMouseEnter={(e) => {
+                onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) => {
                   if (!isActive) {
                     e.currentTarget.style.background = 'rgba(220, 38, 38, 0.1)';
                     e.currentTarget.style.color = '#DC2626';
                   }
                 }}
-                onMouseLeave={(e) => {
+                onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) => {
                   if (!isActive) {
                     e.currentTarget.style.background = 'transparent';
                     e.currentTarget.style.color = '#999';

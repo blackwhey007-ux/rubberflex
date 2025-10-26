@@ -5,6 +5,17 @@ import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import * as THREE from 'three'
 
+// Detect WebGL support
+function hasWebGLSupport(): boolean {
+  try {
+    const canvas = document.createElement('canvas')
+    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl')
+    return !!gl
+  } catch (e) {
+    return false
+  }
+}
+
 // Types pour les variantes de dalles
 type DalleVariant = 'noir-blanc' | 'jaune' | 'bleu' | 'rouge' | 'noir-unique'
 
@@ -326,6 +337,7 @@ function ProductCard3D() {
   const [autoRotate] = useState(true)
   const [rotationSpeed] = useState(0.003)
   const [isLoaded, setIsLoaded] = useState(false)
+  const [webGLSupported, setWebGLSupported] = useState(false)
 
   const { ref, inView } = useInView({
     threshold: 0.3,
@@ -333,6 +345,16 @@ function ProductCard3D() {
   })
 
   useEffect(() => {
+    // Check WebGL support first
+    const supportsWebGL = hasWebGLSupport()
+    setWebGLSupported(supportsWebGL)
+    
+    if (!supportsWebGL) {
+      console.warn('WebGL not supported, 3D will not render')
+      setIsLoaded(false)
+      return
+    }
+
     // Lazy loading avec délai pour améliorer les performances
     const timer = setTimeout(() => {
       setIsLoaded(true)
@@ -392,12 +414,32 @@ function ProductCard3D() {
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            {isLoaded ? (
+            {!webGLSupported ? (
+              <div style={{
+                width: '100%',
+                height: '100%',
+                background: '#ffffff',
+                borderRadius: '15px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexDirection: 'column',
+                gap: '1rem'
+              }}>
+                <div style={{ color: '#DC2626', fontSize: '1rem', fontWeight: 'bold' }}>
+                  WebGL non supporté - Affichage statique activé
+                </div>
+              </div>
+            ) : isLoaded ? (
               <Canvas 
                 camera={{ position: [1.8, 1.5, 1.8], fov: 50 }}
                 performance={{ min: 0.5 }}
                 dpr={[1, 1.5]}
-                shadows
+                gl={{ preserveDrawingBuffer: true, antialias: false }}
+                onCreated={({ gl }) => {
+                  gl.domElement.style.imageRendering = 'auto'
+                }}
+                shadows={false}
                 style={{ background: '#ffffff' }}
               >
                 <CinematicLights />
